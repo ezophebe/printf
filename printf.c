@@ -54,3 +54,17 @@ int _printf(const char *format, ...)
 	va_end(ap);
 	return (count);
 }
+/**
+ *_str_length: funtion counts len of string
+ *@val: given data
+ *Return: lenght of string
+ */
+
+int _str_length(char * val)
+{
+	int count = 0;
+		      
+	while (val[count] != '\0')
+		count++;
+	return (count);
+}
