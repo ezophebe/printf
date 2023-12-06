@@ -9,44 +9,35 @@
 int _printf(const char *format, ...)
 {
 	va_list ap;
-	const char *str;
-	char character, *char_str;
-	int count, int_val, string_lt;
-	double double_val;
-
+	int count;
 
 	if (format == NULL)
 		return (-1);
 	va_start(ap, format);
 	count = 0;
-	for  (str = format; *str != '\0'; ++str)
+	for  (; *format != '\0'; ++format)
 	{
-		if (*str != '%')
+		if (*format != '%')
 		{
-			write(1, str, 1);
-			count++;
+			count += _putchar(*format);
 		}
-		if (*str == '\0')
-			break;
-		switch (*str)
+		switch (*format)
 		{
 			case '%':
-			switch (*++str)
+			switch (*++format)
 			{
 			case 'c':
-				character = va_arg(ap, int);
-				write(1, &character, 1);
-				count++;
+				count += _putchar(va_arg(ap, int));
 				break;
 			case 's':
-				char_str = va_arg(ap, char *);
-				string_lt = _str_length(char_str);
-				write(1, char_str, string_lt);
-				count += string_lt;
+				count += _puts(va_arg(ap, char *));
 				break;
 			case '%':
-				write(1, str, 1);
-				count++;
+				count += _putchar('%');
+				break;
+			default:
+				_putchar('%');
+				count += _putchar(*format);
 				break;
 			}
 		}
@@ -55,15 +46,15 @@ int _printf(const char *format, ...)
 	return (count);
 }
 /**
- *_str_length: funtion counts len of string
- *@val: given data
- *Return: lenght of string
+ * _str_length - funtion counts len of string
+ * @val: given data
+ * Return: lenght of string
  */
 
-int _str_length(char * val)
+int _str_length(char *val)
 {
 	int count = 0;
-		      
+
 	while (val[count] != '\0')
 		count++;
 	return (count);

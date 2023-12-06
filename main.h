@@ -6,6 +6,5 @@
 #include <string.h>
 #include <stdarg.h>
 int _printf(const char *format, ...);
-int _str_length(char * val);
-
+int _str_length(char *val);
 #endif
