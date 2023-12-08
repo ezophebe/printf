@@ -7,4 +7,6 @@
 #include <stdarg.h>
 int _printf(const char *format, ...);
 int _str_length(char *val);
+int _puts(char *s);
+int _putchar(char c);
 #endif

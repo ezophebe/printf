@@ -9,15 +9,7 @@
 int _printf(const char *format, ...)
 {
 	va_list ap;
-<<<<<<< Updated upstream
 	int count;
-=======
-	const char *str;
-	char character, *char_str;
-	int count, /** int_val,*/ string_lt;
-	/**double double_val; */
-
->>>>>>> Stashed changes
 
 	if (format == NULL)
 		return (-1);
