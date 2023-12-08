@@ -9,4 +9,7 @@ int _printf(const char *format, ...);
 int _str_length(char *val);
 int _puts(char *s);
 int _putchar(char c);
+int print_digit(long val, int base_val);
+int print_format(char format_spec, va_list ap);
+
 #endif

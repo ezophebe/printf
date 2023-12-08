@@ -21,70 +21,52 @@ int _printf(const char *format, ...)
 		{
 			count += _putchar(*format);
 		}
-		switch (*format)
+		if (*format == '%')
 		{
-			case '%':
-			switch (*++format)
-			{
-			case 'c':
-				count += _putchar(va_arg(ap, int));
-				break;
-			case 's':
-				count += _puts(va_arg(ap, char *));
-				break;
-			case '%':
-				count += _putchar('%');
-				break;
-			default:
-				_putchar('%');
-				count += _putchar(*format);
-				break;
-			}
+			++format;
+			count += print_format(*format, ap);
 		}
 	}
 	va_end(ap);
 	return (count);
 }
-/**
- * _str_length - funtion counts len of string
- * @val: given data
- * Return: lenght of string
- */
 
-int _str_length(char *val)
+/**
+* print_format - Prints based on format specifiers
+* @format_spec: format specifier argument
+* @ap: Argument pointer.
+*
+* Return: 1 on success, 0 otherwise.
+*/
+
+int print_format(char format_spec, va_list ap)
 {
 	int count = 0;
 
-	while (val[count] != '\0')
-		count++;
-	return (count);
-}
-
-/**
- * _putchar - Prints characters to stdout.
- * @c: Charater to print.
- * Return: 1 on success.
- */
-
-int _putchar(char c)
-{
-	return (write(1, &c, 1));
-}
-
-/**
- *_puts - Prints a string.
- *@s: String parameter.
- *Return: A positive integer on success.
- */
-
-int _puts(char *s)
-{
-	int length = 0;
-
-	while (*s != '\0')
+	switch (format_spec)
 	{
-		length += _putchar(*s);
-			++s;
+		case 'c':
+			count += _putchar(va_arg(ap, int));
+			break;
+		case 's':
+			count += _puts(va_arg(ap, char *));
+			break;
+		case '%':
+			count += _putchar('%');
+			break;
+		case 'd':
+			count += print_digit((long)(va_arg(ap, int)), 10);
+			break;
+		case 'x':
+			case 'X':
+			case 'I':
+			case 'i':
+			count += print_digit((long)(va_arg(ap, unsigned int)), 16);
+			break;
+		default:
+			_putchar('%');
+			count += _putchar(format_spec);
+			break;
 	}
-	return (length);
+	return (count);
 }
